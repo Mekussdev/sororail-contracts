@@ -2,7 +2,7 @@ WASM_TARGET := wasm32v1-none
 WASM_DIR    := target/$(WASM_TARGET)/release
 CONTRACTS   := escrow stream vesting recurring batch_payout
 
-.PHONY: all build test test-all test-contracts fmt fmt-check lint audit optimize wasm-size specs clean ci coverage check-error-docs verify-deployments check-deployments check-wasm-sizes
+.PHONY: all build test test-all test-contracts fmt fmt-check lint audit optimize wasm-size specs clean ci coverage check-error-docs verify-deployments check-deployments check-wasm-sizes check-storage-footprint
 
 all: build test
 
@@ -74,13 +74,16 @@ specs: build
 check-error-docs:
 	./scripts/check_error_docs.sh
 
-ci: fmt-check lint test build check-error-docs check-deployments check-wasm-sizes
+ci: fmt-check lint test build check-error-docs check-deployments check-wasm-sizes check-storage-footprint
 
 check-deployments:
 	./scripts/check_deployments.sh
 
 check-wasm-sizes:
 	./scripts/check_wasm_sizes.sh $(WASM_DIR)
+
+check-storage-footprint:
+	./scripts/check_storage_footprint.sh
 
 # Matches .github/workflows/ci.yml coverage job (lines / regions / functions).
 coverage:

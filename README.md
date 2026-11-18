@@ -108,6 +108,10 @@ entry point before expiry. A caller pays the normal transaction and ledger
 write fees; if the instance has already been archived, it must first be
 restored through the network's archival-state restoration flow.
 
+See [TTL strategy](docs/TTL_STRATEGY.md) for the renewal schedule and operator
+responsibility, and [CLI invocation examples](docs/CONTRACT_INVOKE.md) for
+copy-pasteable testnet commands for every contract.
+
 
 ## Contract Immutability and Migration
 
